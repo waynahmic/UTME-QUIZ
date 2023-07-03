@@ -1,0 +1,44 @@
+.sidebar{
+    width: 20%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: width 0.3s ease-in-out;
+    height: 100vh;
+    
+}
+#sidebar-icon{
+    height: 45px;
+    width: 45px;
+    border: 2px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 7px;
+    background-color: rgba(20, 20, 20, 0.795);
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    
+}
+.sidebar-logo{
+    padding-top: 12px;
+}
+.sidebar-list{
+    padding-inline-start: 0px;
+}
+#directory p{
+    padding-left: 15px;
+}
+#directory{
+    display: flex;
+    gap: 1.5rem;
+    text-align: center;
+    color: orchid;
+    cursor: pointer;
+}
+#directory:hover{
+color: rgb(94, 93, 93);
+background-color: rgba(2, 204, 2, 0.247);
+}
+#Link{
+    text-decoration: none;
+}
