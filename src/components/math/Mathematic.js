@@ -11,15 +11,7 @@ const Mathematic = () => {
         <div className="instructions-container" style={{ maxHeight: "100vh", overflowY: "auto" }}>
            <h1>INSTRUCTIONS FOR CBT EXAMINATION</h1>
     
-    <ol>
-      <li>
-        <h2>Test Duration:</h2>
-        <ul>
-          <li>The exam will be conducted for 2 hours from 9:00 AM to 11:00 AM.</li>
-          <li>Please ensure that you are present at the exam center at least 15 minutes before the scheduled start time.</li>
-        </ul>
-      </li>
-      
+    <ol> 
       <li>
         <h2>Test Format:</h2>
         <ul>
@@ -54,56 +46,12 @@ const Mathematic = () => {
           <li>Ensure that you have answered all the questions before the exam time expires.</li>
           <li>The system will automatically submit your answers once the time is up.</li>
         </ul>
-      </li>
-      
-      <li>
-        <h2>Technical Instructions:</h2>
-        <ul>
-          <li>Familiarize yourself with the computer interface before starting the exam.</li>
-          <li>Use the mouse to select your answers and navigate through the questions.</li>
-          <li>If you encounter any technical issues, raise your hand to seek assistance from the invigilator.</li>
-        </ul>
-      </li>
-      
-      <li>
-        <h2>Prohibited Actions:</h2>
-        <ul>
-          <li>Do not access any external websites or unauthorized materials during the exam.</li>
-          <li>Usage of mobile devices or any electronic communication devices is strictly prohibited.</li>
-          <li>Any form of communication or collaboration with other candidates is strictly prohibited.</li>
-        </ul>
-      </li>
-      
-      <li>
-        <h2>Exam Rules and Policies:</h2>
-        <ul>
-          <li>Maintain exam integrity and adhere to ethical standards throughout the exam.</li>
-          <li>Follow the instructions of the invigilators and test center staff at all times.</li>
-          <li>Any violation of exam rules may result in disqualification and disciplinary action.</li>
-        </ul>
-      </li>
-      
-      <li>
-        <h2>Support and Assistance:</h2>
-        <ul>
-          <li>If you encounter any technical issues or require assistance during the exam, raise your hand and wait for an invigilator to attend to you.</li>
-          <li>Contact the designated helpline or support email for any technical or administrative queries related to the exam.</li>
-        </ul>
-      </li>
-      
-      <li>
-        <h2>Important Reminders:</h2>
-        <ul>
-          <li>Keep your admit card and valid identification document with you during the exam.</li>
-          <li>Do not bring any unauthorized items, including bags, study materials, or electronic devices, into the exam hall.</li>
-          <li>Maintain silence and avoid any distractions that may disrupt other candidates.</li>
-        </ul>
-      </li>
+      </li> 
     </ol>
     
     <p>Best of luck for your exam!</p>
         <Link to="/mathquiz">
-          <button onClick={startQuiz} className='start-btn'>Start</button>
+          <button onClick={startQuiz} className='start-btn --btn --btn-primary'>Start</button>
         </Link>
         </div>
       );

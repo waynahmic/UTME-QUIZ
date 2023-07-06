@@ -17,6 +17,9 @@ import PhysicsQuiz from './components/PhysicsQuiz/PhysicsQuiz';
 import ChemistryQuiz from './components/ChemistryQuiz/ChemistryQuiz';
 import BiologyQuiz from './components/BiologyQuiz/BiologyQuiz';
 import CrsQuiz from './components/CrsQuiz/CrsQuiz';
+import EconomicsQuiz from './components/EconomicsQuiz/EconomicsQuiz';
+import CommerceQuiz from './components/CommerceQuiz/CommerceQuiz';
+import GovernmentQuiz from './components/GovernmentQuiz/GovernmentQuiz';
 
 
 
@@ -49,6 +52,9 @@ function App() {
           <Route element={<ChemistryQuiz/>} path='/chemistryquiz'></Route>
           <Route element={<BiologyQuiz/>} path='/biologyquiz'></Route>
           <Route element={<CrsQuiz/>} path='/crsquiz'></Route>
+          <Route element={<EconomicsQuiz/>} path='/economicsquiz'></Route>
+          <Route element={<CommerceQuiz/>} path='/commercequiz'></Route>
+          <Route element={<GovernmentQuiz/>} path='/governmentquiz'></Route>
         </Routes>
         </div>
     </div>

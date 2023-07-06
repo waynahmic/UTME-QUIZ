@@ -7,6 +7,9 @@
     padding: 20px;
     font-family: Arial, sans-serif;
   }
+  h1{
+    color: var(--color-danger);
+  }
   .quemage{
     display: flex;
     gap: 4rem;
@@ -14,8 +17,7 @@
   .image-container{
     height: 270px;
     width: 250px;
-    border: 1px sandybrown solid;
-    border-radius: 10px;
+
   }
   
   .question {
@@ -101,43 +103,7 @@
     background-color: #28a745;
   }
   
-  .question-map {
-    margin-top: 40px;
-    margin-left: 40px;
-    margin-right: 40px;
-    border: 1px black solid;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 10px;
-    background-color:gainsboro;
 
-  }
-  
-  
-  
-  .question-map ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .question-map li {
-    display: inline-block;
-    margin-right: 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    background-color: #f9f9f9;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 14px;
-  }
-  
-  .question-map li.active {
-    background-color: #007bff;
-    color: #fff;
-  }
   
   .score {
     margin-top: 40px;
@@ -148,5 +114,35 @@
     margin: 0;
     font-size: 16px;
     font-weight: bold;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    object-fit: contain;
+    list-style: none;
+    margin-left: 60px;
+    margin-right: 60px;
+    
+  }
+  
+  .pagination a {
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    
+    
+  }
+  
+  .pagination a:hover {
+    background-color: var(--color-white);
+  }
+  
+  .pagination .active a {
+    background-color:var(--color-white);
+    color: var(--light-blue);
+    border: 1px solid rgba(12, 10, 10, 0.753);
   }
   

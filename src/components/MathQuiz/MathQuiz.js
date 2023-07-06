@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './MathQuiz.css';
 import data from '../Data';
+import {GrNext} from 'react-icons/gr'
+import {GrPrevious} from 'react-icons/gr'
+import ReactPaginate from 'react-paginate';
 
 const MathQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState('');
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  
+
 
   const mathQuestions = data.mathematics;
 
@@ -56,11 +61,13 @@ const MathQuiz = () => {
 
     setSelectedOption('');
     setCurrentQuestion(currentQuestion + 1);
+   
   };
 
   const handlePreviousQuestion = () => {
     setSelectedOption('');
     setCurrentQuestion(currentQuestion - 1);
+    
   };
 
   return (
@@ -100,22 +107,24 @@ const MathQuiz = () => {
       <div className="score">
         <p>Score: {score}</p>
       </div>
-      <div className="question-map">
-        
-        <ul>
-          {mathQuestions.map((_, index) => (
-            <li
-              key={index}
-              className={index === currentQuestion ? 'active' : ''}
-              onClick={() => setCurrentQuestion(index)}
-            >
-              {index + 1}
-            </li>
-          ))}
-        </ul>
-      </div>
+      
+      <ReactPaginate
+      breakLabel="..."
+      nextLabel={<GrNext size={25}/>}
+      previousLabel={<GrPrevious size={25}/>}
+  pageCount={mathQuestions.length}
+  pageRangeDisplayed={5}
+  marginPagesDisplayed={1}
+  onPageChange={(selected) => setCurrentQuestion(selected.selected)}
+  forcePage={currentQuestion}
+  
+  renderOnZeroPageCount={null}
+  containerClassName={'pagination'}
+  activeClassName={'active'}
+/>
+</div>
      
-    </div>
+    
   );
 };
 

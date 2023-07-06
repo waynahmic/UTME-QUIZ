@@ -30,7 +30,7 @@ const Sidebar = () => {
     <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`} style={{ width: sidebarWidth }}>
       <div className='sidebar-up'>
         <div id='sidebar-icon' onClick={toggleSidebar}>
-        <MdOutlineWidgets size={20} className='sidebar-logo' />
+        <MdOutlineWidgets size={30} className='sidebar-logo' />
         </div>
         {isSidebarOpen && (
           <div className='sidebar-route'>

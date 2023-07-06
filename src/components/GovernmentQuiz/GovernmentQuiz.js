@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import './PhysicsQuiz.css';
+import './GovernmentQuiz.css';
+import data from '../Data';
 import {GrNext} from 'react-icons/gr'
 import {GrPrevious} from 'react-icons/gr'
-import data from '../Data';
 import ReactPaginate from 'react-paginate';
 
 
-const PhysicsQuiz = () => {
+const GovernmentQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState('');
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
 
-  const physicsQuestions = data.physics;
+
+
+  const governmentQuestions = data.government;
 
   useEffect(() => {
     // Randomize the order of options for each question
-    physicsQuestions.forEach((question) => {
+    governmentQuestions.forEach((question) => {
       question.options.sort(() => Math.random() - 0.5);
     });
   }, []);
 
   const handleOptionSelect = (option) => {
-    const currentQuestionData = physicsQuestions[currentQuestion];
+    const currentQuestionData = governmentQuestions[currentQuestion];
     const isCorrectAnswer = option === currentQuestionData.answer;
   
     // Check if the current question has been answered previously
@@ -54,12 +56,14 @@ const PhysicsQuiz = () => {
   };
   
   
-
+  
+  
+  
+  
+  
+  
+  
   const handleNextQuestion = () => {
-    if (selectedOption === physicsQuestions[currentQuestion].answer) {
-      setScore(score + 1);
-    }
-
     setSelectedOption('');
     setCurrentQuestion(currentQuestion + 1);
   };
@@ -70,14 +74,14 @@ const PhysicsQuiz = () => {
   };
 
   return (
-    <div className="physics-quiz">
-      <h1>Physics</h1>
+    <div className="government-quiz">
+      <h1>Government</h1>
       <div className='quemage'>
       <div className="question">
         <h2>Question {currentQuestion + 1}</h2>
-        <p>{physicsQuestions[currentQuestion].question}</p>
+        <p>{governmentQuestions[currentQuestion].question}</p>
         <div className="options">
-          {physicsQuestions[currentQuestion].options.map((option, index) => (
+          {governmentQuestions[currentQuestion].options.map((option, index) => (
             <div
               key={index}
               className={`option ${selectedOption === option ? 'selected' : ''}`}
@@ -95,13 +99,14 @@ const PhysicsQuiz = () => {
             Previous
           </button>
           <button onClick={handleNextQuestion}>
-            {currentQuestion === physicsQuestions.length - 1 ? 'Finish' : 'Next'}
+            {currentQuestion === governmentQuestions.length - 1 ? 'Finish' : 'Next'}
           </button>
         </div>
       </div>
+      
       <div className='image-container'>
-         
-      </div>
+ 
+</div>
       </div>
       <div className="score">
         <p>Score: {score}</p>
@@ -110,7 +115,7 @@ const PhysicsQuiz = () => {
       breakLabel="..."
       nextLabel={<GrNext size={25}/>}
       previousLabel={<GrPrevious size={25}/>}
-  pageCount={physicsQuestions.length}
+  pageCount={governmentQuestions.length}
   pageRangeDisplayed={5}
   marginPagesDisplayed={1}
   onPageChange={(selected) => setCurrentQuestion(selected.selected)}
@@ -120,9 +125,8 @@ const PhysicsQuiz = () => {
   containerClassName={'pagination'}
   activeClassName={'active'}
 />
-     
     </div>
   );
 };
 
-export default PhysicsQuiz;
+export default GovernmentQuiz;

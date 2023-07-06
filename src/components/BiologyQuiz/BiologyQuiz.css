@@ -14,8 +14,7 @@
   .image-container{
     height: 450px;
     width: 320px;
-    border: 1px sandybrown solid;
-    border-radius: 10px;
+   
     object-fit: contain;
   }
   .image-container img{

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './CrsQuiz.css';
 import data from '../Data';
+import {GrNext} from 'react-icons/gr'
+import {GrPrevious} from 'react-icons/gr'
+import ReactPaginate from 'react-paginate';
+
 
 const CrsQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -101,27 +105,26 @@ const CrsQuiz = () => {
       </div>
       
       <div className='image-container'>
-  {crsQuestions[currentQuestion].image && (
-    <img src={crsQuestions[currentQuestion].image}  />
-  )}
+ 
 </div>
       </div>
       <div className="score">
         <p>Score: {score}</p>
       </div>
-      <div className="question-map">
-        <ul>
-          {crsQuestions.map((_, index) => (
-            <li
-              key={index}
-              className={index === currentQuestion ? 'active' : ''}
-              onClick={() => setCurrentQuestion(index)}
-            >
-              {index + 1}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ReactPaginate
+      breakLabel="..."
+      nextLabel={<GrNext size={25}/>}
+      previousLabel={<GrPrevious size={25}/>}
+  pageCount={crsQuestions.length}
+  pageRangeDisplayed={5}
+  marginPagesDisplayed={1}
+  onPageChange={(selected) => setCurrentQuestion(selected.selected)}
+  forcePage={currentQuestion}
+  
+  renderOnZeroPageCount={null}
+  containerClassName={'pagination'}
+  activeClassName={'active'}
+/>
     </div>
   );
 };

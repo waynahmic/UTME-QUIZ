@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './ChemistryQuiz.css';
 import data from '../Data';
+import {GrNext} from 'react-icons/gr'
+import {GrPrevious} from 'react-icons/gr'
+import ReactPaginate from 'react-paginate';
+
+
 
 const ChemistryQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -99,21 +104,21 @@ const ChemistryQuiz = () => {
       <div className="score">
         <p>Score: {score}</p>
       </div>
-      <div className="question-map">
-        
-        <ul>
-          {chemistryQuestions.map((_, index) => (
-            <li
-              key={index}
-              className={index === currentQuestion ? 'active' : ''}
-              onClick={() => setCurrentQuestion(index)}
-            >
-              {index + 1}
-            </li>
-          ))}
-        </ul>
-      </div>
-     
+      <ReactPaginate
+      breakLabel="..."
+      nextLabel={<GrNext size={25}/>}
+      previousLabel={<GrPrevious size={25}/>}
+  pageCount={chemistryQuestions.length}
+  pageRangeDisplayed={5}
+  marginPagesDisplayed={1}
+  onPageChange={(selected) => setCurrentQuestion(selected.selected)}
+  forcePage={currentQuestion}
+ 
+  renderOnZeroPageCount={null}
+  containerClassName={'pagination'}
+  activeClassName={'active'}
+/>
+
     </div>
   );
 };
