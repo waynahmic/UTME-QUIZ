@@ -4,6 +4,7 @@ import data from '../Data';
 import {GrNext} from 'react-icons/gr'
 import {GrPrevious} from 'react-icons/gr'
 import ReactPaginate from 'react-paginate';
+import Countdowntimer from '../Countdowntimer';
 
 const MathQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -61,6 +62,7 @@ const MathQuiz = () => {
 
     setSelectedOption('');
     setCurrentQuestion(currentQuestion + 1);
+    
    
   };
 
@@ -72,7 +74,10 @@ const MathQuiz = () => {
 
   return (
     <div className="math-quiz">
+      <div className='timer'>
       <h1>Mathematics</h1>
+      <Countdowntimer/>
+      </div>
       <div className='quemage'>
       <div className="question">
         <h2>Question {currentQuestion + 1}</h2>
@@ -100,6 +105,7 @@ const MathQuiz = () => {
           </button>
         </div>
       </div>
+      
       <div className='image-container'>
          
       </div>

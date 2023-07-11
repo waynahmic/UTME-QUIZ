@@ -4,6 +4,8 @@ import data from '../Data';
 import {GrNext} from 'react-icons/gr'
 import {GrPrevious} from 'react-icons/gr'
 import ReactPaginate from 'react-paginate';
+import Countdowntimer from '../Countdowntimer';
+
 
 
 
@@ -69,7 +71,10 @@ const ChemistryQuiz = () => {
 
   return (
     <div className="chemistry-quiz">
+      <div className='timer'>
       <h1>Chemistry</h1>
+      <Countdowntimer/>
+      </div>
       <div className='quemage'>
       <div className="question">
         <h2>Question {currentQuestion + 1}</h2>

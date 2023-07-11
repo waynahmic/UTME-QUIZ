@@ -4,6 +4,11 @@ import {GrNext} from 'react-icons/gr'
 import {GrPrevious} from 'react-icons/gr'
 import data from '../Data';
 import ReactPaginate from 'react-paginate';
+import Countdowntimer from '../Countdowntimer';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import './countdown.css'
+
 
 
 const BiologyQuiz = () => {
@@ -11,8 +16,7 @@ const BiologyQuiz = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
-
-
+  
 
   const biologyQuestions = data.biology;
 
@@ -75,7 +79,10 @@ const BiologyQuiz = () => {
 
   return (
     <div className="biology-quiz">
+      <div className='timer'>
       <h1>Biology</h1>
+      <Countdowntimer/>
+      </div>
       <div className='quemage'>
       <div className="question">
         <h2>Question {currentQuestion + 1}</h2>

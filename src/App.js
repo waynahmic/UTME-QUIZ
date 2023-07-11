@@ -20,6 +20,9 @@ import CrsQuiz from './components/CrsQuiz/CrsQuiz';
 import EconomicsQuiz from './components/EconomicsQuiz/EconomicsQuiz';
 import CommerceQuiz from './components/CommerceQuiz/CommerceQuiz';
 import GovernmentQuiz from './components/GovernmentQuiz/GovernmentQuiz';
+import Countdowntimer from './components/Countdowntimer';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -33,7 +36,7 @@ function App() {
   return (
     <BrowserRouter>
     <div className="quiz">
-     
+     <ToastContainer position="top-center" autoClose={1000}/>
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>
       <div className={`content ${isSidebarOpen ? 'sidebar-open' : ''}`}>
       <Routes>
