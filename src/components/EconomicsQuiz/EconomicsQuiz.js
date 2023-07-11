@@ -4,6 +4,7 @@ import {GrNext} from 'react-icons/gr'
 import {GrPrevious} from 'react-icons/gr'
 import data from '../Data';
 import ReactPaginate from 'react-paginate';
+import Calculator from '../calculator/Calculator';
 
 
 const EconomicsQuiz = () => {
@@ -103,7 +104,7 @@ const EconomicsQuiz = () => {
           </button>
         </div>
       </div>
-      
+      <Calculator/>
       <div className='image-container'>
  
 </div>

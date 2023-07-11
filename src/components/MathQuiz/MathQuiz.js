@@ -4,6 +4,8 @@ import data from '../Data';
 import {GrNext} from 'react-icons/gr'
 import {GrPrevious} from 'react-icons/gr'
 import ReactPaginate from 'react-paginate';
+import Calculator from '../calculator/Calculator';
+
 
 const MathQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -20,8 +22,14 @@ const MathQuiz = () => {
     mathQuestions.forEach((question) => {
       question.options.sort(() => Math.random() - 0.5);
     });
+    mathQuestions.forEach((question) => {
+      data.mathematics.sort(() => Math.random() - 0.5);
+    });
+    
+    
+  
   }, []);
-
+ 
   const handleOptionSelect = (option) => {
     const currentQuestionData = mathQuestions[currentQuestion];
     const isCorrectAnswer = option === currentQuestionData.answer;
@@ -99,7 +107,9 @@ const MathQuiz = () => {
             {currentQuestion === mathQuestions.length - 1 ? 'Finish' : 'Next'}
           </button>
         </div>
+        
       </div>
+      <Calculator/>
       <div className='image-container'>
          
       </div>
