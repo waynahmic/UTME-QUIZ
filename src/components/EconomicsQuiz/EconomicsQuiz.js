@@ -4,7 +4,7 @@ import {GrNext} from 'react-icons/gr'
 import {GrPrevious} from 'react-icons/gr'
 import data from '../Data';
 import ReactPaginate from 'react-paginate';
-import Calculator from '../calculator/Calculator';
+
 
 
 const EconomicsQuiz = () => {
@@ -76,7 +76,10 @@ const EconomicsQuiz = () => {
 
   return (
     <div className="economics-quiz">
+      <div className='timer'>
       <h1>Economics</h1>
+      <Countdowntimer/>
+      </div>
       <div className='quemage'>
       <div className="question">
         <h2>Question {currentQuestion + 1}</h2>
