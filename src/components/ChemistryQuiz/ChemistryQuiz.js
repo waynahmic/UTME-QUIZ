@@ -4,14 +4,22 @@ import data from '../Data';
 import {GrNext} from 'react-icons/gr'
 import {GrPrevious} from 'react-icons/gr'
 import ReactPaginate from 'react-paginate';
+import Countdowntimer from '../Countdowntimer';
+import Calculator from '../calculator/Calculator';
+import Scoreboard from '../Scoreboard/Scoreboard';
 
 
 
-const ChemistryQuiz = () => {
+const ChemistryQuiz = ({isQuiz}) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedOption, setSelectedOption] = useState('');
-  const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [selectedOption, setSelectedOption] = useState({});
   const [score, setScore] = useState(0);
+  const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [timeUp, setTimeUp] = useState(false);
+  const [finished, setFinished] = useState(false);
+  
+
+
   const chemistryQuestions = data.chemistry;
 
   useEffect(() => {
@@ -19,8 +27,14 @@ const ChemistryQuiz = () => {
     chemistryQuestions.forEach((question) => {
       question.options.sort(() => Math.random() - 0.5);
     });
+    chemistryQuestions.forEach((question) => {
+      data.chemistry.sort(() => Math.random() - 0.5);
+    });
+    
+    
+  
   }, []);
-
+ 
   const handleOptionSelect = (option) => {
     const currentQuestionData = chemistryQuestions[currentQuestion];
     const isCorrectAnswer = option === currentQuestionData.answer;
@@ -46,33 +60,62 @@ const ChemistryQuiz = () => {
       }
     }
   
-    setSelectedOption(option);
+    const selectedOptionInfo = {
+      questionIndex: currentQuestion,
+      selectedOption: option,
+      correctOption: currentQuestionData.answer,
+    };
+    setSelectedOption(selectedOptionInfo);
   
     setTimeout(() => {
       handleNextQuestion();
     }, 200);
   };
-  
+
   const handleNextQuestion = () => {
     if (selectedOption === chemistryQuestions[currentQuestion].answer) {
       setScore(score + 1);
     }
 
     setSelectedOption('');
+    
     setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestion === chemistryQuestions.length - 1) {
+      // Last question, mark the quiz as finished
+      setFinished(true);
+      
+    } else {
+      setCurrentQuestion(currentQuestion + 1);
+    }
   };
 
   const handlePreviousQuestion = () => {
-    setSelectedOption('');
+    setSelectedOption({});
     setCurrentQuestion(currentQuestion - 1);
+    
+  };
+  // Function to handle when the time is up
+  const handleTimeUp = () => {
+    setTimeUp(true);
+  };
+
+  // Function to handle when the user clicks on "Finish"
+  const handleFinishQuiz = () => {
+    setFinished(true);
   };
 
   return (
+    <>
+    {isQuiz && (
     <div className="chemistry-quiz">
+      
       <div className='timer'>
       <h1>Chemistry</h1>
-      <Countdowntimer/>
+      <Countdowntimer handleTimeUp={handleTimeUp} finished={finished} />
       </div>
+      
+      {!timeUp && !finished && (
+      <>
       <div className='quemage'>
       <div className="question">
         <h2>Question {currentQuestion + 1}</h2>
@@ -99,8 +142,10 @@ const ChemistryQuiz = () => {
             {currentQuestion === chemistryQuestions.length - 1 ? 'Finish' : 'Next'}
           </button>
         </div>
+       
       </div>
       <Calculator/>
+
       <div className='image-container'>
          
       </div>
@@ -108,22 +153,52 @@ const ChemistryQuiz = () => {
       <div className="score">
         <p>Score: {score}</p>
       </div>
-      <ReactPaginate
-      breakLabel="..."
-      nextLabel={<GrNext size={25}/>}
-      previousLabel={<GrPrevious size={25}/>}
-  pageCount={chemistryQuestions.length}
-  pageRangeDisplayed={5}
-  marginPagesDisplayed={1}
-  onPageChange={(selected) => setCurrentQuestion(selected.selected)}
-  forcePage={currentQuestion}
- 
-  renderOnZeroPageCount={null}
-  containerClassName={'pagination'}
-  activeClassName={'active'}
-/>
+      </>
+      )}
+      
+     
+     
+      {(timeUp || finished) && <Scoreboard score={score}  totalQuestion ={chemistryQuestions.length}/>}
+       {!timeUp && !finished && (
+        <>
+        <ReactPaginate
+        breakLabel="..."
+        nextLabel={<GrNext size={25}/>}
+        previousLabel={<GrPrevious size={25}/>}
+    pageCount={chemistryQuestions.length}
+    pageRangeDisplayed={5}
+    marginPagesDisplayed={1}
+    onPageChange={(selected) => setCurrentQuestion(selected.selected)}
+    forcePage={currentQuestion}
+    
+    renderOnZeroPageCount={null}
+    containerClassName={'pagination'}
+    activeClassName={'active'}
+  />
+  </>
+          )}
+        </div>
+      )}
 
-    </div>
+    
+
+     
+{!isQuiz && (
+        <div className="answer-page">
+          {/* Your code for displaying answers goes here */}
+          <h1>Answer Page</h1>
+          {/* For each question, map through chemistryQuestions and display the question, selected option, and correct answer */}
+          {chemistryQuestions.map((question, index) => (
+            <div key={index}>
+              <p>Question {index + 1}</p>
+              <p>Question: {question.question}</p>
+              <p>Selected Option: {selectedOption}</p>
+              <p>Correct Answer: {question.answer}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 

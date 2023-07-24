@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Calculator.css';
 import {FcCalculator} from 'react-icons/fc'
 
@@ -8,11 +8,14 @@ const Calculator = () => {
   const [firstOperand, setFirstOperand] = useState(null);
   const [operator, setOperator] = useState(null);
   const [waitingForSecondOperand, setWaitingForSecondOperand] = useState(false);
+  
 
   const handleCalculatorClick = () => {
     setIsCalculatorVisible(!isCalculatorVisible);
   };
 
+ 
+  
   const handleDigitClick = (digit) => {
     if (displayValue === '0' || waitingForSecondOperand) {
       setDisplayValue(digit);
@@ -76,7 +79,7 @@ const Calculator = () => {
     setWaitingForSecondOperand(false);
   };
 
-  return (
+    return (
     <div className="calculator-wrapper">
       <div className="calculator-icon" onClick={handleCalculatorClick}>
         <FcCalculator size={30}/>
