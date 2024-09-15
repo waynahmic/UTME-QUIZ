@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './EconomicsQuiz.css';
+import data from '../Data';
 import {GrNext} from 'react-icons/gr'
 import {GrPrevious} from 'react-icons/gr'
-import data from '../Data';
 import ReactPaginate from 'react-paginate';
 import Countdowntimer from '../Countdowntimer';
+import Calculator from '../calculator/Calculator';
+import Scoreboard from '../Scoreboard/Scoreboard';
+
 
 
 
@@ -13,6 +16,8 @@ const EconomicsQuiz = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [timeUp, setTimeUp] = useState(false);
+  const [finished, setFinished] = useState(false);
 
 
 
@@ -68,19 +73,38 @@ const EconomicsQuiz = () => {
   const handleNextQuestion = () => {
     setSelectedOption('');
     setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestion === economicsQuestions.length - 1) {
+      // Last question, mark the quiz as finished
+      setFinished(true);
+      
+    } else {
+      setCurrentQuestion(currentQuestion + 1);
+    }
   };
 
   const handlePreviousQuestion = () => {
     setSelectedOption('');
     setCurrentQuestion(currentQuestion - 1);
   };
+  // Function to handle when the time is up
+  const handleTimeUp = () => {
+    setTimeUp(true);
+  };
+
+  // Function to handle when the user clicks on "Finish"
+  const handleFinishQuiz = () => {
+    setFinished(true);
+  };
 
   return (
     <div className="economics-quiz">
       <div className='timer'>
       <h1>Economics</h1>
-      <Countdowntimer/>
+      <Countdowntimer handleTimeUp={handleTimeUp} finished={finished} />
       </div>
+      
+      {!timeUp && !finished && (
+      <>
       <div className='quemage'>
       <div className="question">
         <h2>Question {currentQuestion + 1}</h2>
@@ -108,7 +132,7 @@ const EconomicsQuiz = () => {
           </button>
         </div>
       </div>
-      
+      <Calculator/>
       <div className='image-container'>
  
 </div>
@@ -116,6 +140,14 @@ const EconomicsQuiz = () => {
       <div className="score">
         <p>Score: {score}</p>
       </div>
+      </>
+      )}
+      
+     
+     
+      {(timeUp || finished) && <Scoreboard score={score}  totalQuestion ={economicsQuestions.length}/>}
+       {!timeUp && !finished && (
+        <>
       <ReactPaginate
       breakLabel="..."
       nextLabel={<GrNext size={25}/>}
@@ -130,6 +162,8 @@ const EconomicsQuiz = () => {
   containerClassName={'pagination'}
   activeClassName={'active'}
 />
+</>
+)}
     </div>
   );
 };

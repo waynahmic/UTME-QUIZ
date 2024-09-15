@@ -4,6 +4,9 @@ import {GrNext} from 'react-icons/gr'
 import {GrPrevious} from 'react-icons/gr'
 import data from '../Data';
 import ReactPaginate from 'react-paginate';
+import Calculator from '../calculator/Calculator';
+import Countdowntimer from '../Countdowntimer';
+import Scoreboard from '../Scoreboard/Scoreboard';
 
 
 const PhysicsQuiz = () => {
@@ -11,7 +14,9 @@ const PhysicsQuiz = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
-
+  const [timeUp, setTimeUp] = useState(false);
+  const [finished, setFinished] = useState(false);
+  
   const physicsQuestions = data.physics;
 
   useEffect(() => {
@@ -62,16 +67,38 @@ const PhysicsQuiz = () => {
 
     setSelectedOption('');
     setCurrentQuestion(currentQuestion + 1);
+    setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestion === physicsQuestions.length - 1) {
+      // Last question, mark the quiz as finished
+      setFinished(true);
+      
+    } else {
+      setCurrentQuestion(currentQuestion + 1);
+    }
   };
 
   const handlePreviousQuestion = () => {
     setSelectedOption('');
     setCurrentQuestion(currentQuestion - 1);
   };
+   // Function to handle when the time is up
+   const handleTimeUp = () => {
+    setTimeUp(true);
+  };
+
+  // Function to handle when the user clicks on "Finish"
+  const handleFinishQuiz = () => {
+    setFinished(true);
+  };
 
   return (
     <div className="physics-quiz">
+      <div className='timer'>
       <h1>Physics</h1>
+      <Countdowntimer handleTimeUp={handleTimeUp} finished={finished} />
+      </div>
+      {!timeUp && !finished && (
+      <>
       <div className='quemage'>
       <div className="question">
         <h2>Question {currentQuestion + 1}</h2>
@@ -99,13 +126,20 @@ const PhysicsQuiz = () => {
           </button>
         </div>
       </div>
+      <Calculator/>
       <div className='image-container'>
          
       </div>
       </div>
       <div className="score">
         <p>Score: {score}</p>
+        
       </div>
+      </>
+        )}
+        {(timeUp || finished) && <Scoreboard score={score}  totalQuestion ={physicsQuestions.length}/>}
+       {!timeUp && !finished && (
+        <>
       <ReactPaginate
       breakLabel="..."
       nextLabel={<GrNext size={25}/>}
@@ -120,6 +154,8 @@ const PhysicsQuiz = () => {
   containerClassName={'pagination'}
   activeClassName={'active'}
 />
+</>
+       )}
      
     </div>
   );

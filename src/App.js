@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import Sidebar from './components/sidebar/Side';
-import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import { BrowserRouter,Routes,Route, } from 'react-router-dom';
 import Mathematic from './components/math/Mathematic';
 import English from './components/english/English';
 import Physics from './components/physics/Physics';
@@ -23,16 +23,26 @@ import GovernmentQuiz from './components/GovernmentQuiz/GovernmentQuiz';
 import Countdowntimer from './components/Countdowntimer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Scoreboard from './components/Scoreboard/Scoreboard';
+import Email from './components/Email/Email';
+import Answer from './components/Answer/Answer';
+import data from './components/Data';
+
+
 
 
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+  
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  
+
+  
   return (
     <BrowserRouter>
     <div className="quiz">
@@ -40,6 +50,7 @@ function App() {
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>
       <div className={`content ${isSidebarOpen ? 'sidebar-open' : ''}`}>
       <Routes>
+        
           <Route element={<Mathematic/>} path='/'></Route>
           <Route element={<English/>} path='/English'></Route>
           <Route element={<Physics/>} path='/Physics'></Route>
@@ -52,12 +63,17 @@ function App() {
           <Route element={<MathQuiz/>} path='/mathquiz'></Route>
           <Route element={<EnglishQuiz/>} path='/englishquiz'></Route>
           <Route element={<PhysicsQuiz/>} path='/physicsquiz'></Route>
-          <Route element={<ChemistryQuiz/>} path='/chemistryquiz'></Route>
+          <Route element={<EnglishQuiz/>} path='/englishquiz'></Route>
           <Route element={<BiologyQuiz/>} path='/biologyquiz'></Route>
           <Route element={<CrsQuiz/>} path='/crsquiz'></Route>
           <Route element={<EconomicsQuiz/>} path='/economicsquiz'></Route>
           <Route element={<CommerceQuiz/>} path='/commercequiz'></Route>
           <Route element={<GovernmentQuiz/>} path='/governmentquiz'></Route>
+          <Route element={<Scoreboard/>} path='/scoreboard'></Route>
+          <Route element={<Email/>} path='/email'></Route>
+          <Route element={<Answer/>} path='/answer'></Route>
+         
+          
         </Routes>
         </div>
     </div>

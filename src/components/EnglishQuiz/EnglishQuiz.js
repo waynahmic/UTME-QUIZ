@@ -5,14 +5,22 @@ import {GrNext} from 'react-icons/gr'
 import {GrPrevious} from 'react-icons/gr'
 import ReactPaginate from 'react-paginate';
 import Countdowntimer from '../Countdowntimer';
+import Calculator from '../calculator/Calculator';
+import Scoreboard from '../Scoreboard/Scoreboard';
+
 
 
 
 const EnglishQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState('');
-  const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [score, setScore] = useState(0);
+  const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [timeUp, setTimeUp] = useState(false);
+  const [finished, setFinished] = useState(false);
+
+
+
   const englishQuestions = data.english;
 
   useEffect(() => {
@@ -53,27 +61,50 @@ const EnglishQuiz = () => {
       handleNextQuestion();
     }, 200);
   };
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
   const handleNextQuestion = () => {
-    if (selectedOption === englishQuestions[currentQuestion].answer) {
-      setScore(score + 1);
-    }
-
     setSelectedOption('');
     setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestion === englishQuestions.length - 1) {
+      // Last question, mark the quiz as finished
+      setFinished(true);
+      
+    } else {
+      setCurrentQuestion(currentQuestion + 1);
+    }
   };
 
   const handlePreviousQuestion = () => {
     setSelectedOption('');
     setCurrentQuestion(currentQuestion - 1);
   };
+  // Function to handle when the time is up
+  const handleTimeUp = () => {
+    setTimeUp(true);
+  };
+
+  // Function to handle when the user clicks on "Finish"
+  const handleFinishQuiz = () => {
+    setFinished(true);
+  };
 
   return (
     <div className="english-quiz">
-     <div className='timer'>
+      <div className='timer'>
       <h1>English</h1>
-      <Countdowntimer/>
+      <Countdowntimer handleTimeUp={handleTimeUp} finished={finished} />
       </div>
+      
+      {!timeUp && !finished && (
+      <>
       <div className='quemage'>
       <div className="question">
         <h2>Question {currentQuestion + 1}</h2>
@@ -101,13 +132,22 @@ const EnglishQuiz = () => {
           </button>
         </div>
       </div>
+      <Calculator/>
       <div className='image-container'>
-         
-      </div>
+ 
+</div>
       </div>
       <div className="score">
         <p>Score: {score}</p>
       </div>
+      </>
+      )}
+      
+     
+     
+      {(timeUp || finished) && <Scoreboard score={score}  totalQuestion ={englishQuestions.length}/>}
+       {!timeUp && !finished && (
+        <>
       <ReactPaginate
       breakLabel="..."
       nextLabel={<GrNext size={25}/>}
@@ -122,7 +162,8 @@ const EnglishQuiz = () => {
   containerClassName={'pagination'}
   activeClassName={'active'}
 />
-     
+</>
+)}
     </div>
   );
 };

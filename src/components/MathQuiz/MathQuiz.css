@@ -1,5 +1,5 @@
 .math-quiz {
-    max-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     
@@ -10,6 +10,7 @@
   h1{
     color: var(--color-danger);
   }
+  
   .quemage{
     display: flex;
     gap: 4rem;
@@ -136,6 +137,7 @@
     
     
   }
+  
   
   .pagination a:hover {
     background-color: var(--color-white);

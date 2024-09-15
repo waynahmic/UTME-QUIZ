@@ -7,6 +7,7 @@ import ReactPaginate from 'react-paginate';
 import Countdowntimer from '../Countdowntimer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Scoreboard from '../Scoreboard/Scoreboard';
 // import './countdown.css'
 
 
@@ -16,6 +17,8 @@ const BiologyQuiz = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [timeUp, setTimeUp] = useState(false);
+  const [finished, setFinished] = useState(false);
   
 
   const biologyQuestions = data.biology;
@@ -70,19 +73,39 @@ const BiologyQuiz = () => {
   const handleNextQuestion = () => {
     setSelectedOption('');
     setCurrentQuestion(currentQuestion + 1);
+    setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestion === biologyQuestions.length - 1) {
+      // Last question, mark the quiz as finished
+      setFinished(true);
+      
+    } else {
+      setCurrentQuestion(currentQuestion + 1);
+    }
   };
 
   const handlePreviousQuestion = () => {
     setSelectedOption('');
     setCurrentQuestion(currentQuestion - 1);
   };
+  // Function to handle when the time is up
+  const handleTimeUp = () => {
+    setTimeUp(true);
+  };
+
+  // Function to handle when the user clicks on "Finish"
+  const handleFinishQuiz = () => {
+    setFinished(true);
+  };
 
   return (
     <div className="biology-quiz">
-      <div className='timer'>
+<div className='timer'>
       <h1>Biology</h1>
-      <Countdowntimer/>
+      <Countdowntimer handleTimeUp={handleTimeUp} finished={finished} />
       </div>
+      
+      {!timeUp && !finished && (
+      <>
       <div className='quemage'>
       <div className="question">
         <h2>Question {currentQuestion + 1}</h2>
@@ -120,6 +143,14 @@ const BiologyQuiz = () => {
       <div className="score">
         <p>Score: {score}</p>
       </div>
+      </>
+      )}
+      
+     
+     
+      {(timeUp || finished) && <Scoreboard score={score}  totalQuestion ={biologyQuestions.length}/>}
+       {!timeUp && !finished && (
+        <>
       <ReactPaginate
       breakLabel="..."
       nextLabel={<GrNext size={25}/>}
@@ -134,6 +165,8 @@ const BiologyQuiz = () => {
   containerClassName={'pagination'}
   activeClassName={'active'}
 />
+</>
+       )}
     </div>
   );
 };
